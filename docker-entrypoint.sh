@@ -172,6 +172,22 @@ KETTLE_STEP_PERFORMANCE_SNAPSHOT_LIMIT=1
 " > .kettle/kettle.properties
 	fi
 
+  if [ ! -f .kettle/repositories.xml ]; then
+    echo "Generating repositories.xml..."
+    cat <<< '<?xml version="1.0" encoding="UTF-8"?>
+<repositories>
+  <repository>
+    <id>KettleFileRepository</id>
+    <name>Local</name>
+    <description>File repository</description>
+    <is_default>true</is_default>
+    <base_directory>/data-integration/repository</base_directory>
+    <read_only>N</read_only>
+    <hides_hidden_files>N</hides_hidden_files>
+  </repository>
+</repositories>' > .kettle/repositories.xml
+  fi
+
 	if [ ! -f classes/log4j.xml ]; then
 		echo "Generating log4j.xml..."
 		cat <<< '<?xml version="1.0" encoding="UTF-8"?>
@@ -268,6 +284,11 @@ gen_slave_config() {
     <max_log_lines>${PDI_MAX_LOG_LINES}</max_log_lines>
     <max_log_timeout_minutes>${PDI_MAX_LOG_TIMEOUT}</max_log_timeout_minutes>
     <object_timeout_minutes>${PDI_MAX_OBJ_TIMEOUT}</object_timeout_minutes>
+    <repository>
+      <name>Local</name>
+      <username>admin</username>
+      <password>admin</password>
+    </repository>
 </slave_config>" > pwd/slave.xml
 	fi
 }
