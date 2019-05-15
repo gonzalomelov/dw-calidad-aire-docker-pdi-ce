@@ -29,6 +29,10 @@ RUN useradd -md $KETTLE_HOME -s /bin/bash $PDI_USER \
 	&& sed -i 's/^\(respectStartLvlDuringFeatureStartup=\).*/\1true/' system/karaf/etc/org.apache.karaf.features.cfg \
 	&& sed -i 's/^\(featuresBootAsynchronous=\).*/\1false/' system/karaf/etc/org.apache.karaf.features.cfg
 
+COPY jmx_prometheus_javaagent.jar /usr/local/jmx_prometheus_javaagent.jar
+
+RUN mkdir repository
+
 ENTRYPOINT ["/sbin/my_init", "--", "./docker-entrypoint.sh"]
 
 #VOLUME ["$KETTLE_HOME/logs", "$KETTLE_HOME/system/karaf/caches", "$KETTLE_HOME/system/karaf/data", "/tmp"]
