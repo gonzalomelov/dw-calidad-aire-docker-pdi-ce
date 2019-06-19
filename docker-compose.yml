@@ -52,3 +52,4 @@ services:
         soft: 65535
         hard: 65535
     restart: always
+    network_mode: bridge
