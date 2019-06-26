@@ -53,3 +53,5 @@ services:
         hard: 65535
     restart: always
     network_mode: bridge
+    external_links:
+    - postgreststarterkit_db_1:db
