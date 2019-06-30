@@ -55,6 +55,7 @@ services:
     network_mode: bridge
     external_links:
     - postgreststarterkit_db_1:db
+    - sftp_sftp_1:sftp
 
   nginx: 
     image: nginx:latest
