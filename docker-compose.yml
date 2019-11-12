@@ -67,4 +67,4 @@ services:
     network_mode: bridge
     restart: always
     ports:
-      - "9090:9090"
+      - "9030:9090"
